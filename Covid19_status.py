@@ -8,18 +8,18 @@ import requests
 api_key = "ayVCtybZx%2B%2FDZiEINx1jlkml4UI%2BIiYjaePes3S2TQwtkzbdaKg94XMQVUgjP%2FDCHsVbETilML4ofr%2FfqK4Lhw%3D%3D"
 api_key_decode = requests.utils.unquote(api_key)
 
-# 현재시간, 오늘/어제 일자 포매팅
+# 현재시간, 시작/종료 일자 포매팅
 cur_time = datetime.datetime.now()
-tday = str(cur_time.date()).replace('-','')
-yday = str(cur_time.date()-datetime.timedelta(days=1)).replace('-','')
+eday = str(cur_time.date()).replace('-','')
+sday = str(cur_time.date()-datetime.timedelta(days=2)).replace('-','')  # 현재일 - 2일
 
 url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson"
 parameters = {
     "serviceKey":api_key_decode,
     "pageNo":1,
     "numOfROws":10,
-    "startCreateDt":yday,
-    "endCreateDt":tday}
+    "startCreateDt":sday,
+    "endCreateDt":eday}
 
 req = requests.get(url, params = parameters)
 html = req.text
