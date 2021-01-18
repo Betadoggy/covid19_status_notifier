@@ -3,6 +3,10 @@ import os
 import sys
 import datetime
 import requests
+from pyfiglet import Figlet # ASCII 텍스트 아트 모듈
+
+# Figlet 객체
+f = Figlet(font='slant')
 
 # 인증키 디코딩
 api_key = "ayVCtybZx%2B%2FDZiEINx1jlkml4UI%2BIiYjaePes3S2TQwtkzbdaKg94XMQVUgjP%2FDCHsVbETilML4ofr%2FfqK4Lhw%3D%3D"
@@ -36,7 +40,7 @@ def invalidInputError():
     print("INVALID INPUT! try again...")
 
 if __name__ == "__main__":
-    print("COVID-19 STATUS")
+    print(f.renderText("COVID-19 STATUS"))
     sepLine()
 
     # 현재시간
