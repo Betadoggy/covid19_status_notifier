@@ -41,6 +41,7 @@ def invalidInputError():
 
 if __name__ == "__main__":
     print(f.renderText("COVID-19 STATUS"))
+    print("COVID-19 STATUS v0.1.0") # 버전 표기
     sepLine()
 
     # 현재시간
