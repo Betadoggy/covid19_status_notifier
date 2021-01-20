@@ -29,9 +29,25 @@ req = requests.get(url, params = parameters)
 html = req.text
 soup = BeautifulSoup(html, 'html.parser')
 
+# ANSI Colors
+class Colors: 
+    BLACK = '\033[30m' 
+    RED = '\033[31m' 
+    GREEN = '\033[32m' 
+    YELLOW = '\033[33m'
+    BLUE = '\033[34m' 
+    MAGENTA = '\033[35m' 
+    CYAN = '\033[36m' 
+    WHITE = '\033[37m' 
+    UNDERLINE = '\033[4m' 
+    RESET = '\033[0m'
+
 
 def sepLine():
     print("="*10)
+
+def sepLinelight():
+    print('-'*10)
 
 def clear():
     os.system('cls')
@@ -52,12 +68,21 @@ if __name__ == "__main__":
     statedate = soup.find_all('statedt')[0].text
     print("State Date \t%s" % statedate[:4]+'-'+statedate[4:6]+'-'+statedate[6:])
 
+
     # 총, 일일 확진자
     totalcases = int(soup.find_all('decidecnt')[0].text)
     dailycases = totalcases - int(soup.find_all('decidecnt')[1].text)
 
-    print("Daily Cases \t%d" % dailycases)
-    print("Total Cases \t%d" % totalcases)
+    print(Colors.YELLOW + "Daily Cases \t%d" % dailycases + Colors.RESET)
+    print(Colors.YELLOW + "Total Cases \t%d" % totalcases + Colors.RESET )
+
+
+    # 총, 일일 사망자
+    totaldeaths = int(soup.find_all('deathcnt')[0].text)
+    dailydeaths = totaldeaths - int(soup.find_all('deathcnt')[1].text)
+    
+    print(Colors.RED + "Daily Deaths \t%d" % dailydeaths + Colors.RESET)
+    print(Colors.RED + "Total Deaths \t%d" % totaldeaths + Colors.RESET)
 
     sepLine()
     print("To exit, type 'exit'")
